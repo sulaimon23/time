@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Time | Js</title>
+	<script>
+		const Timer = {
+			default: new Date(),
+
+			minValidate: function(obj){
+				let value, date, month, day, year;
+				value = obj.value;
+				date = value.split('-');
+				month = date[1];
+				day = date[2];
+				year = date[0];
+
+				if(Timer.default.getUTCFullYear() > year){
+					alert('Please select a future date!!!');
+					obj.value = '';
+				}
+			},
+			getMonthName: function(num){
+				switch (num) {
+					case 0:
+						month = "JAN";
+						break;
+					case 1:
+						month = "FEB";
+						break;
+					case 2:
+						month = "MAR";
+						break;
+					case 3:
+						month = "APR";
+						break;
+					case 4:
+						month = "MAY";
+						break;
+					case 5:
+						month = "JUN";
+						break;
+					case 6:
+						month = "JUL";
+						break;
+					case 7:
+						month = "AUG";
+						break;
+					case 8:
+						month = "SEP";
+						break;
+					case 9:
+						month = "OCT";
+						break;
+					case 10:
+						month = "NOV";
+						break;
+					case 11:
+						month = "DEC";
+						break;
+				};
+
+				return month;
+			},
+			start: function(date){
+				let newDate, month, day, year;
+				newDate = date.split('-');
+				month = Math.round(newDate[1]);
+				day = newDate[2];
+				year = newDate[0];
+
+
+				document.getElementById('day').innerHTML = day;
+				document.getElementById('month').innerHTML = Timer.getMonthName(month);
+				document.getElementById('year').innerHTML = year;
+				document.getElementById('show').style = "display: inline;";
+
+				let a = new Date();
+				let b = a.getMonth();
+				let c = a.getDate();
+				let d = a.getFullYear();
+				
+				let e = year - d;
+				let f = day - c;
+				let g = month - b;
+				console.log(g);
+
+			},
+			end: function(){
+
+			},
+			init: function(){
+				let input, value
+				input = document.getElementById('option');
+				value = input.value;
+				if(value == ''){
+					alert('Please select a date!!!');
+				}
+				
+				Timer.start(value);
+			}
+		}
+
+	</script>
+
+	<style>
+		body{
+		height: 95vh;
+		width:99%;
+		}
+		#show{
+		display: none;
+		}
+		.container{
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+		height: 100%;
+		margin: auto;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		}
+		.wrapper{
+		margin: auto;
+		text-align: center;
+		}
+		.count{
+		color:white;
+		text-transform: uppercase;
+		font-size:25px;
+		text-shadow: 2px 3px 4px red;
+		}
+		#time{
+		color:aqua;
+		text-transform: uppercase;
+		font-size:70px;
+		text-shadow:3px 3px 5px red;
+		margin: 20px;
+		}
+		input{
+		width:300px;
+		padding:6px;
+		}
+		input::placeholder{
+		color: red;
+		font-weight: 600;
+		}
+		button{
+		padding:7px 15px 7px 15px;
+		color: white;
+		background: gray;
+		outline: none;
+		border:1px solid transparent;
+		cursor: pointer;
+		}
+		button:hover{
+		background: red;
+		}
+
+	</style>
+</head>
+<body>
+
+ <img src="photo6.jpeg" alt="" width="100%" height="100%">
+ <div class="container">
+  <div class="wrapper">
+   <div id="time-wrapper">
+    <div class="count">COUNTDOWN 
+    <span id="show">
+     <span id="month"></span> 
+     <span id="day"></span> , 
+     <span id="year"></span>
+    </span>
+    <div id="time"></div>
+   </div>
+   <div>
+    <input type="date" oninput="Timer.minValidate(this)" id="option">
+    <button type="submit" onclick="Timer.init()">SUBMIT</button>
+   </div>
+  </div>
+ </div>
+</body>
+</html>
